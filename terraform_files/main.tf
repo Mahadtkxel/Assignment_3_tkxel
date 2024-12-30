@@ -119,6 +119,6 @@ resource "azurerm_virtual_machine" "vm-tkxelassign2" {
     }
   }
   tags = {
-    environment = "testing"
+    environment = var.environment_name
   }
 }

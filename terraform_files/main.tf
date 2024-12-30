@@ -4,7 +4,15 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "=3.0.0"
     }
+    
   }
+
+  backend "azurerm" {
+        resource_group_name  = data.azurerm_resource_group.existing.name
+        storage_account_name = azurerm_storage_account.stor_acc_tkxelassign3.name
+        container_name       = "tfstate"
+        key                  = "terraform.tfstate"
+    }
 }
 
 

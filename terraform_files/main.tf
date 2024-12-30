@@ -138,7 +138,7 @@ resource "azurerm_storage_account" "stor_acc_tkxelassign3" {
 }
 
 resource "azurerm_storage_container" "stor_cont_tkxelassign3" {
-  name                  = "storContTkxelassign3"
+  name                  = "storconttkxelassign3"
   storage_account_name  = azurerm_storage_account.stor_acc_tkxelassign3.name
   container_access_type = "private"
 }

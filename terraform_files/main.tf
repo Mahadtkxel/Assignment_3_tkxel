@@ -130,7 +130,7 @@ resource "azurerm_virtual_machine" "vm-tkxelassign3" {
 
 # creating storage account
 resource "azurerm_storage_account" "stor_acc_tkxelassign3" {
-  name                     = "storAcctkxelassign3"
+  name                     = "storacctkxelassign3"
   resource_group_name      = data.azurerm_resource_group.existing.name
   location                 = data.azurerm_resource_group.existing.location
   account_tier             = "Standard"

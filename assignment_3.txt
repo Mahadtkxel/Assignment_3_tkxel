@@ -1,0 +1,8 @@
+For Ansible roles, you can see your Ansible course from Kodekloud: 
+
+- Push your terraform (VNet, VM, Blob) code to GitHub
+- Provision VM, VNet, and blob storage using Terraform. Please follow the best practices of Terraform 
+- Write GitHub action (CI/CD) to provision the infrastructure on Azure
+- Also, destroy the provisioned infrastructure using the GitHub Action after the below points are done 
+- Connect to provisioned VM instance from local and run ansible role to install nginx docker and docker-compose. Each ansible role should be separate for each installer
+- Write a separate role that will change the nginx port from 80 to 81 

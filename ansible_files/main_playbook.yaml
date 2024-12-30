@@ -1,0 +1,9 @@
+---
+- name: Configure server with NGINX, Docker and Docker Compose
+  hosts: all
+  become: true
+
+  roles:
+    - nginx
+    - docker
+    - docker_compose

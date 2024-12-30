@@ -41,9 +41,10 @@ jobs:
       env:
         TF_VAR_keydata: ${{ secrets.TF_VAR_KEYDATA }}
         TF_VAR_adm_user: ${{ secrets.TF_VAR_ADM_USER }}
+        TF_VAR_adm_pass: ${{ secrets.TF_VAR_ADM_PASS }}
         TF_VAR_environment_name: ${{ secrets.TF_VAR_ENVIRON_NAME }}
         TF_VAR_rg_name: ${{ secrets.TF_VAR_RESOURCE_GROUP_NAME }}
-    
+        
     # Terraform Apply
     - name: Terraform Apply
       run: terraform apply -auto-approve tfplan
@@ -51,5 +52,6 @@ jobs:
       env:
         TF_VAR_keydata: ${{ secrets.TF_VAR_KEYDATA }}
         TF_VAR_adm_user: ${{ secrets.TF_VAR_ADM_USER }}
+        TF_VAR_adm_pass: ${{ secrets.TF_VAR_ADM_PASS }}
         TF_VAR_environment_name: ${{ secrets.TF_VAR_ENVIRON_NAME }}
         TF_VAR_rg_name: ${{ secrets.TF_VAR_RESOURCE_GROUP_NAME }}

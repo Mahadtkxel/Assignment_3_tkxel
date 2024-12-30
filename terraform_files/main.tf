@@ -129,7 +129,7 @@ resource "azurerm_virtual_machine" "vm-tkxelassign3" {
 }
 
 # creating storage account
-resource "azurerm_storage_account" "stor_acc_tkxelassign3" {
+resource "azurerm_storage_account" "storAccTkxelassign3" {
   name                     = "storacc_tkxelassign3"
   resource_group_name      = data.azurerm_resource_group.existing.name
   location                 = data.azurerm_resource_group.existing.location
@@ -139,13 +139,13 @@ resource "azurerm_storage_account" "stor_acc_tkxelassign3" {
 
 resource "azurerm_storage_container" "stor_cont_tkxelassign3" {
   name                  = "stor_cont_tkxelassign3"
-  storage_account_name  = azurerm_storage_account.stor_acc_tkxelassign3.name
+  storage_account_name  = azurerm_storage_account.storAccTkxelassign3.name
   container_access_type = "private"
 }
 
 resource "azurerm_storage_blob" "blob_tkxelassign3" {
   name                   = "my-awesome-content.zip"
-  storage_account_name   = azurerm_storage_account.stor_acc_tkxelassign3.name
+  storage_account_name   = azurerm_storage_account.storAccTkxelassign3.name
   storage_container_name = azurerm_storage_container.stor_cont_tkxelassign3.name
   type                   = "Block"
   # source                 = "some-local-file.zip"

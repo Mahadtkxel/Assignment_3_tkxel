@@ -118,6 +118,7 @@ resource "azurerm_virtual_machine" "vm-tkxelassign2" {
         path = "/home/mahad/.ssh/authorized_keys"
     }
   }
+  
   tags = {
     environment = var.environment_name
   }

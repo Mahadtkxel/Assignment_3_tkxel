@@ -11,7 +11,7 @@ terraform {
 provider "azurerm" {
    
   features {}
-  # skip_provider_registration = true
+  skip_provider_registration = true
 }
 
 # getting current resource group as playground permissions are limited
@@ -118,7 +118,7 @@ resource "azurerm_virtual_machine" "vm-tkxelassign2" {
         path = "/home/mahad/.ssh/authorized_keys"
     }
   }
-  
+
   tags = {
     environment = var.environment_name
   }

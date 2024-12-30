@@ -73,7 +73,7 @@ resource "azurerm_network_security_group" "terraform_nsg" {
 }
 
 # Connect the security group
-resource "azurerm_network_interface_security_group_association" "example" {
+resource "azurerm_network_interface_security_group_association" "nsg_association_terraform" {
   network_interface_id      = azurerm_network_interface.nic-tkxelassign2.id
   network_security_group_id = azurerm_network_security_group.terraform_nsg.id
 }

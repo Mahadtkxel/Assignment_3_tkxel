@@ -8,10 +8,15 @@ terraform {
   }
 
   backend "azurerm" {
-        resource_group_name  = "${var.rg_name}"
+        resource_group_name  = data.azurerm_resource_group.existing.name
         storage_account_name = "storacctkxelassign3"
         container_name       = "tfstate"
         key                  = "terraform.tfstate"
+        subscription_id = jsondecode(var.azure_credentials).subscriptionId
+        client_id       = jsondecode(var.azure_credentials).clientId
+        client_secret   = jsondecode(var.azure_credentials).clientSecret
+        tenant_id       = jsondecode(var.azure_credentials).tenantId
+        skip_provider_registration = true
     }
 }
 

@@ -33,12 +33,23 @@ jobs:
     - name: Terraform Init
       run: terraform init
       working-directory: ./terraform_files
-
+      
     # Terraform Plan
     - name: Terraform Plan
       run: terraform plan -out=tfplan
       working-directory: ./terraform_files
+      env:
+        TF_VAR_keydata: ${{ secrets.TF_VAR_KEYDATA }}
+        TF_VAR_adm_user: ${{ secrets.TF_VAR_ADM_USER }}
+        TF_VAR_environment_name: ${{ secrets.TF_VAR_ENVIRON_NAME }}
+        TF_VAR_rg_name: ${{ secrets.TF_VAR_RESOURCE_GROUP_NAME }}
+    
     # Terraform Apply
     - name: Terraform Apply
       run: terraform apply -auto-approve tfplan
       working-directory: ./terraform_files
+      env:
+        TF_VAR_keydata: ${{ secrets.TF_VAR_KEYDATA }}
+        TF_VAR_adm_user: ${{ secrets.TF_VAR_ADM_USER }}
+        TF_VAR_environment_name: ${{ secrets.TF_VAR_ENVIRON_NAME }}
+        TF_VAR_rg_name: ${{ secrets.TF_VAR_RESOURCE_GROUP_NAME }}

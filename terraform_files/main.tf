@@ -24,35 +24,35 @@ data "azurerm_resource_group" "existing" {
 }
 
 # Creating a virtual network 
-resource "azurerm_virtual_network" "vn-tkxelassign2" {
-  name                = "network-tkxelassign2"
+resource "azurerm_virtual_network" "vn-tkxelassign3" {
+  name                = "network-tkxelassign3"
   resource_group_name = data.azurerm_resource_group.existing.name
   location            = data.azurerm_resource_group.existing.location
   address_space       = ["10.0.0.0/16"]
 }
 
-resource "azurerm_subnet" "subnet-tkxelassign2" {
-  name                 = "subnet-tkxelassign2"
+resource "azurerm_subnet" "subnet-tkxelassign3" {
+  name                 = "subnet-tkxelassign3"
   resource_group_name  = data.azurerm_resource_group.existing.name
-  virtual_network_name = azurerm_virtual_network.vn-tkxelassign2.name
+  virtual_network_name = azurerm_virtual_network.vn-tkxelassign3.name
   address_prefixes     = ["10.0.2.0/24"]
 }
 
 resource "azurerm_public_ip" "terraform_public_ip" {
-  name                = "public-ip-tkxelassign2"
+  name                = "public-ip-tkxelassign3"
   location            = data.azurerm_resource_group.existing.location
   resource_group_name = data.azurerm_resource_group.existing.name
   allocation_method   = "Dynamic"
 }
 
-resource "azurerm_network_interface" "nic-tkxelassign2" {
-  name                = "tkxelassign2-nic"
+resource "azurerm_network_interface" "nic-tkxelassign3" {
+  name                = "tkxelassign3-nic"
   location            = data.azurerm_resource_group.existing.location
   resource_group_name = data.azurerm_resource_group.existing.name
 
   ip_configuration {
-    name                          = "tkxelassign2-IP-configuration1"
-    subnet_id                     = azurerm_subnet.subnet-tkxelassign2.id
+    name                          = "tkxelassign3-IP-configuration1"
+    subnet_id                     = azurerm_subnet.subnet-tkxelassign3.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.terraform_public_ip.id
   }
@@ -79,15 +79,15 @@ resource "azurerm_network_security_group" "terraform_nsg" {
 
 # Connect the security group
 resource "azurerm_network_interface_security_group_association" "nsg_association_terraform" {
-  network_interface_id      = azurerm_network_interface.nic-tkxelassign2.id
+  network_interface_id      = azurerm_network_interface.nic-tkxelassign3.id
   network_security_group_id = azurerm_network_security_group.terraform_nsg.id
 }
 
-resource "azurerm_virtual_machine" "vm-tkxelassign2" {
-  name                  = "vm-tkxelassign2"
+resource "azurerm_virtual_machine" "vm-tkxelassign3" {
+  name                  = "vm-tkxelassign3"
   location              = data.azurerm_resource_group.existing.location
   resource_group_name   = data.azurerm_resource_group.existing.name
-  network_interface_ids = [azurerm_network_interface.nic-tkxelassign2.id]
+  network_interface_ids = [azurerm_network_interface.nic-tkxelassign3.id]
   vm_size               = "standard_b1s"
 
   # Uncomment this line to delete the OS disk automatically when deleting the VM
@@ -110,7 +110,7 @@ resource "azurerm_virtual_machine" "vm-tkxelassign2" {
   }
 
   os_profile {
-    computer_name  = "vm-tkxelassign2"        # Name of the VM inside the OS
+    computer_name  = "vm-tkxelassign3"        # Name of the VM inside the OS
     admin_username = var.adm_user         # Admin username
     admin_password = var.adm_pass  # Password for the admin user (optional if using SSH keys)
   }
@@ -126,4 +126,27 @@ resource "azurerm_virtual_machine" "vm-tkxelassign2" {
   tags = {
     environment = var.environment_name
   }
+}
+
+# creating storage account
+resource "azurerm_storage_account" "stor_acc_tkxelassign3" {
+  name                     = "storacc_tkxelassign3"
+  resource_group_name      = data.azurerm_resource_group.existing.name
+  location                 = data.azurerm_resource_group.existing.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+}
+
+resource "azurerm_storage_container" "stor_cont_tkxelassign3" {
+  name                  = "stor_cont_tkxelassign3"
+  storage_account_name  = azurerm_storage_account.stor_acc_tkxelassign3.name
+  container_access_type = "private"
+}
+
+resource "azurerm_storage_blob" "blob_tkxelassign3" {
+  name                   = "my-awesome-content.zip"
+  storage_account_name   = azurerm_storage_account.stor_acc_tkxelassign3.name
+  storage_container_name = azurerm_storage_container.stor_cont_tkxelassign3.name
+  type                   = "Block"
+  # source                 = "some-local-file.zip"
 }

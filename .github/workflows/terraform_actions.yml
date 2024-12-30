@@ -44,6 +44,10 @@ jobs:
         TF_VAR_adm_pass: ${{ secrets.TF_VAR_ADM_PASS }}
         TF_VAR_environment_name: ${{ secrets.TF_VAR_ENVIRON_NAME }}
         TF_VAR_rg_name: ${{ secrets.TF_VAR_RESOURCE_GROUP_NAME }}
+        ARM_CLIENT_ID: ${{ secrets.AZURE_CREDENTIALS | fromJson | clientId }}
+        ARM_CLIENT_SECRET: ${{ secrets.AZURE_CREDENTIALS | fromJson | clientSecret }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_CREDENTIALS | fromJson | subscriptionId }}
+        ARM_TENANT_ID: ${{ secrets.AZURE_CREDENTIALS | fromJson | tenantId }}
         
     # Terraform Apply
     - name: Terraform Apply
@@ -55,3 +59,7 @@ jobs:
         TF_VAR_adm_pass: ${{ secrets.TF_VAR_ADM_PASS }}
         TF_VAR_environment_name: ${{ secrets.TF_VAR_ENVIRON_NAME }}
         TF_VAR_rg_name: ${{ secrets.TF_VAR_RESOURCE_GROUP_NAME }}
+        ARM_CLIENT_ID: ${{ secrets.AZURE_CREDENTIALS | fromJson | clientId }}
+        ARM_CLIENT_SECRET: ${{ secrets.AZURE_CREDENTIALS | fromJson | clientSecret }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_CREDENTIALS | fromJson | subscriptionId }}
+        ARM_TENANT_ID: ${{ secrets.AZURE_CREDENTIALS | fromJson | tenantId }}

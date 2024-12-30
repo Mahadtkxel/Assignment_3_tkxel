@@ -1,5 +1,0 @@
-environment_name = "testing"
-rg_name = "1-11758d91-playground-sandbox"
-adm_user = "mahad"
-adm_pass = "A12345!!!@"
-keydata = "~/.ssh/id_rsa.pub"

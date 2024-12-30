@@ -32,11 +32,13 @@ jobs:
     # Initialize Terraform
     - name: Terraform Init
       run: terraform init
+      working-directory: ./terraform_files
 
     # Terraform Plan
     - name: Terraform Plan
       run: terraform plan -out=tfplan
-
+      working-directory: ./terraform_files
     # Terraform Apply
     - name: Terraform Apply
       run: terraform apply -auto-approve tfplan
+      working-directory: ./terraform_files

@@ -118,8 +118,8 @@ resource "azurerm_virtual_machine" "vm-tkxelassign2" {
   os_profile_linux_config {
     disable_password_authentication = true
     ssh_keys {
-        key_data = file(var.keydata) 
-        path = "/home/mahad/.ssh/authorized_keys"
+        key_data = var.keydata 
+        path = "/home/${var.adm_user}/.ssh/authorized_keys"
     }
   }
 

@@ -9,7 +9,7 @@ terraform {
 
   backend "azurerm" {
         resource_group_name  = data.azurerm_resource_group.existing.name
-        storage_account_name = azurerm_storage_account.stor_acc_tkxelassign3.name
+        storage_account_name = data.azurerm_storage_account.current.name
         container_name       = "tfstate"
         key                  = "terraform.tfstate"
     }
@@ -24,6 +24,11 @@ provider "azurerm" {
   client_secret   = jsondecode(var.azure_credentials).clientSecret
   tenant_id       = jsondecode(var.azure_credentials).tenantId
   skip_provider_registration = true
+}
+
+data "azurerm_storage_account" "current" {
+  name = azurerm_storage_account.stor_acc_tkxelassign3.name
+  resource_group_name = data.azurerm_resource_group.existing.name
 }
 
 # getting current resource group as playground permissions are limited

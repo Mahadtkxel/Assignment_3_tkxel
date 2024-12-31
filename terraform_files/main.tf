@@ -33,7 +33,6 @@ terraform {
 }
 
 
-
 # getting current resource group as playground permissions are limited
 data "azurerm_resource_group" "existing" {
   name = var.rg_name 

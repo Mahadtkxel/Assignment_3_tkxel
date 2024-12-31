@@ -34,11 +34,6 @@ terraform {
 
 
 
-data "azurerm_storage_account" "current" {
-  name = azurerm_storage_account.stor_acc_tkxelassign3.name
-  resource_group_name = data.azurerm_resource_group.existing.name
-}
-
 # getting current resource group as playground permissions are limited
 data "azurerm_resource_group" "existing" {
   name = var.rg_name 
@@ -70,13 +65,13 @@ resource "azurerm_network_interface" "nic-tkxelassign3" {
   name                = "tkxelassign3-nic"
   location            = data.azurerm_resource_group.existing.location
   resource_group_name = data.azurerm_resource_group.existing.name
-
   ip_configuration {
     name                          = "tkxelassign3-IP-configuration1"
     subnet_id                     = azurerm_subnet.subnet-tkxelassign3.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.terraform_public_ip.id
   }
+  depends_on = [ azurerm_network_interface_security_group_association.nsg_association_terraform, azurerm_network_security_group.terraform_nsg ]
 }
 
 # Create Network Security Group and rule

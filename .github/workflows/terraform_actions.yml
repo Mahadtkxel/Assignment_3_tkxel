@@ -19,6 +19,7 @@ jobs:
         TF_VAR_rg_name: ${{ secrets.TF_VAR_RESOURCE_GROUP_NAME }}
         ARM_CLIENT_ID: ${{ secrets.AZURE_CREDENTIALS }}
         TF_VAR_azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+        ARM_USE_AZUREAD: true
 
     steps:
     # Checkout the repository

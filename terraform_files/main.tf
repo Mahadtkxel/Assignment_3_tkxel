@@ -71,7 +71,7 @@ resource "azurerm_network_interface" "nic-tkxelassign3" {
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.terraform_public_ip.id
   }
-  depends_on = [azurerm_virtual_machine.vm-tkxelassign3]
+  
 }
 
 # Create Network Security Group and rule
@@ -106,6 +106,7 @@ resource "azurerm_virtual_machine" "vm-tkxelassign3" {
   network_interface_ids = [azurerm_network_interface.nic-tkxelassign3.id]
   vm_size               = "standard_b1s"
   
+  depends_on = [ azurerm_network_interface.nic-tkxelassign3 ]
   # Uncomment this line to delete the OS disk automatically when deleting the VM
   # delete_os_disk_on_termination = true
 

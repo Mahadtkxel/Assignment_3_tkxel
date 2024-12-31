@@ -7,12 +7,8 @@ terraform {
     
   }
 
-  backend "azurerm" {
-  resource_group_name = "1-0a9b8ce0-playground-sandbox"
-  storage_account_name = "storacctkxelassign3"
-  container_name = "tfstate"
-  key = "terraform.tfstate"
-}
+  
+}  
 
 }
 
@@ -26,6 +22,17 @@ provider "azurerm" {
   tenant_id       = jsondecode(var.azure_credentials).tenantId
   skip_provider_registration = true
 }
+
+terraform {
+    backend "azurerm" {
+    resource_group_name = "1-0a9b8ce0-playground-sandbox"
+    storage_account_name = "storacctkxelassign3"
+    container_name = "tfstate"
+    key = "terraform.tfstate"
+  }
+}
+
+
 
 data "azurerm_storage_account" "current" {
   name = azurerm_storage_account.stor_acc_tkxelassign3.name

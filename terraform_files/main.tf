@@ -71,7 +71,7 @@ resource "azurerm_network_interface" "nic-tkxelassign3" {
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.terraform_public_ip.id
   }
-  depends_on = [ azurerm_network_interface_security_group_association.nsg_association_terraform, azurerm_network_security_group.terraform_nsg ]
+  depends_on = [ azurerm_network_interface_security_group_association.nsg_association_terraform ]
 }
 
 # Create Network Security Group and rule

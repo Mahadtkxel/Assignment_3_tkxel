@@ -7,6 +7,13 @@ terraform {
     
   }
 
+  backend "azurerm" {
+  resource_group_name = "1-0a9b8ce0-playground-sandbox"
+  storage_account_name = "storacctkxelassign3"
+  container_name = "tfstate"
+  key = "terraform.tfstate"
+}
+
 }
 
 
@@ -156,4 +163,11 @@ resource "azurerm_storage_blob" "blob_tkxelassign3" {
   storage_container_name = azurerm_storage_container.stor_cont_tkxelassign3.name
   type                   = "Block"
   # source                 = "some-local-file.zip"
+}
+
+# container for tf backend
+resource "azurerm_storage_container" "tfstate" {
+  name = "tfstate"
+  storage_account_name = azurerm_storage_account.stor_acc_tkxelassign3.name
+  container_access_type = "blob"
 }

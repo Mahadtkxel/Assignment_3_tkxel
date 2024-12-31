@@ -64,6 +64,7 @@ resource "azurerm_network_interface" "nic-tkxelassign3" {
   name                = "tkxelassign3-nic"
   location            = data.azurerm_resource_group.existing.location
   resource_group_name = data.azurerm_resource_group.existing.name
+  depends_on = [azurerm_network_security_group.terraform_nsg]
   ip_configuration {
     name                          = "tkxelassign3-IP-configuration1"
     subnet_id                     = azurerm_subnet.subnet-tkxelassign3.id
@@ -90,6 +91,9 @@ resource "azurerm_network_security_group" "terraform_nsg" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
+   lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # Connect the security group
@@ -105,7 +109,7 @@ resource "azurerm_virtual_machine" "vm-tkxelassign3" {
   network_interface_ids = [azurerm_network_interface.nic-tkxelassign3.id]
   vm_size               = "standard_b1s"
   
-  depends_on = [ azurerm_network_interface.nic-tkxelassign3 ]
+  depends_on = [ azurerm_network_interface.nic-tkxelassign3, azurerm_network_interface_security_group_association.nsg_association_terraform ]
   # Uncomment this line to delete the OS disk automatically when deleting the VM
   # delete_os_disk_on_termination = true
 

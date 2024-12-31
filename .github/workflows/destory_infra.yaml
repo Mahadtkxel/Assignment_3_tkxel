@@ -1,12 +1,7 @@
 name: Destroy infra on Azure
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:  
 
 jobs:
   terraform:
@@ -41,8 +36,6 @@ jobs:
     - name: Terraform Init
       run: terraform init
       working-directory: ./terraform_files
-      
-    # Terraform Plan
-    - name: Terraform Plan
-      run: terraform plan -out=tfplan
-      working-directory: ./terraform_files
+
+    - name: Terraform Destroy
+      run: terraform destroy -auto-approve
